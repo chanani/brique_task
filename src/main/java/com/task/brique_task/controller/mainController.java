@@ -178,7 +178,7 @@ public class mainController {
             String[] arr = input.replaceAll("[^\\( | \\)]","").split("");
             int count = 0;
             for (int i = 0; i < arr.length - 1; i++) {
-                   if (arr[i].equals("(") && !arr[i].equals(arr[i + 1])) count++;
+                   if (arr[i].equals("(") && !arr[i].equals(arr[i + 1])) count += 2;
             }
             return ResponseEntity.ok(String.valueOf(count));
         } catch (Exception e) {
