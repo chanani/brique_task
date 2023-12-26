@@ -1,0 +1,15 @@
+.back-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 20px;
+    height: 40px;
+    width: 80px;
+}
+
+.back-btn > a {
+    text-decoration: none;
+    color: black;
+}

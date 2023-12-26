@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+        }
+
+        h1, p {
+            text-align: center
+        }
+
+        table {
+            margin: 0 auto;
+            border: 1px solid #777;
+        }
+
+        th, td {
+            border: 1px solid #777;
+        }
+    </style>
+
+    <link rel="stylesheet" th:href="@{/css/btn.css}"/>
+</head>
+<body>
+
+<h1>Employees Table</h1>
+
+<button class="back-btn"><a href="/">뒤로가기</a></button>
+<table>
+    <thead>
+    <tr>
+        <th>순서</th>
+        <th>종업원 번호</th>
+        <th>이름</th>
+        <th>성</th>
+        <th>고용 일자</th>
+        <th>성별</th>
+        <th>부서 이름</th>
+        <th>직급</th>
+        <th>최대 급여</th>
+    </tr>
+    </thead>
+    <tbody th:each="list, index : ${list}">
+        <td th:text="${index.index + 1}" style="text-align: center"></td>
+        <td th:text="${list.emp_no}"></td>
+        <td th:text="${list.first_name}"></td>
+        <td th:text="${list.last_name}"></td>
+        <td th:text="${list.gender}" style="text-align: center"></td>
+        <td th:text="${list.hire_date}"></td>
+        <td th:text="${list.dept_name}"></td>
+        <td th:text="${list.title}"></td>
+        <td th:text="${list.max_salary + '원'}"></td>
+    </tbody>
+</table>
+<p>total rows : [[${list.size()}]]명</p>
+
+</body>
+</html>

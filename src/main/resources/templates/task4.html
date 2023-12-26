@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+        }
+
+        h1, p {
+            text-align: center
+        }
+
+        table {
+            margin: 0 auto;
+            border: 1px solid #777;
+        }
+
+        th, td {
+            border: 1px solid #777;
+        }
+        .random-box {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .randomBtn {
+            background-color : transparent;
+
+        }
+    </style>
+
+    <link rel="stylesheet" th:href="@{/css/btn.css}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+
+<h1>Temperature Chart</h1>
+<button class="back-btn"><a href="/">뒤로가기</a></button>
+
+<div style="width: 900px; height: 900px; margin: 0 auto">
+    <canvas id="myChart"></canvas>
+    <div style="margin-top: 20px">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>평균 기온</th>
+                <th>평균 습도</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <td>1월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>2월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>3월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>4월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>5월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>6월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>7월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>8월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>9월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>10월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td>11월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+            <tbody>
+            <td id="month">12월</td>
+            <td><input type="number" oninput="onChange(event, 1)"></td>
+            <td><input type="number" oninput="onChange(event, 2)"></td>
+            </tbody>
+        </table>
+        <div class="random-box">
+            <button onclick="random()" class="randomBtn">Random</button>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    let data1 = [];
+    let data2 = [];
+    load();
+    const onChange = (e, n) => {
+        let month_text = e.target.parentNode.parentNode.firstChild.innerText;
+        let input_value = e.target.value;
+        let month = month_text.slice(0, month_text.length - 1);
+        if (n == 1) data1[month - 1] = input_value;
+        else data2[month - 1] = input_value;
+        load();
+    }
+
+    const random = () => {
+        for (let i = 0; i < 2; i++) {
+            for (let j = 0; j < 12; j++) {
+                let random_num = Math.floor(Math.random() * (40 - (-20) + 1)) + (-20);
+                if (i === 0) data1[j] = random_num;
+                else data2[j] = random_num;
+            }
+        }
+        load();
+    }
+
+    function load (){
+        let context = document
+            .getElementById('myChart')
+            .getContext('2d');
+        let myChart = new Chart(context, {
+            type: 'line', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                    //x 축
+                    '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월',
+                ],
+                datasets: [
+                    { //데이터
+                        label: '평균 기온', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: data1,
+                        backgroundColor: [
+                            //색상
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    },
+                    {
+                        label: '평균 습도',
+                        fill: false,
+                        data: data2,
+                        backgroundColor: 'rgb(157, 109, 12)',
+                        borderColor: 'rgb(157, 109, 12)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

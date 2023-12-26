@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1{text-align: center}
+        form {text-align: center}
+        form > input {
+            background-color: transparent;
+            border-radius: 5px;
+            width: 50px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Task MainPage</h1>
+
+    <form action="/asd" method="get" name="mainForm">
+        <input type="button" value="과제1" onclick="move('task1')">
+        <input type="button" value="과제2" onclick="move('task2')">
+        <input type="button" value="과제3" onclick="move('task3')">
+        <input type="button" value="과제4" onclick="move('task4')">
+        <input type="button" value="과제5" onclick="move('task5')">
+        <input type="button" value="과제7" onclick="move('task7')">
+    </form>
+
+</body>
+
+<script>
+
+    function move (page){
+        const mainForm = document.mainForm;
+        mainForm.action = "/" + page;
+        mainForm.submit();
+    }
+</script>
+
+</html>

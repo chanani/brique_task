@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.task.brique_task.employ.service.EmployMapper">
+
+    <select  id="allData" resultType="EmployVO">
+        SELECT E.emp_no,
+               E.first_name,
+               E.last_name,
+               E.gender,
+               E.hire_date,
+               D.dept_name,
+               T.title,
+               max(S.salary) as max_salary
+        FROM employees E
+                 JOIN dept_emp de ON E.emp_no = de.emp_no
+                 JOIN departments D ON de.dept_no = D.dept_no
+                 JOIN titles T ON E.emp_no = T.emp_no
+                 JOIN salaries S ON E.emp_no = S.emp_no
+        WHERE E.hire_date >= '2000-01-01'
+        GROUP BY E.emp_no,
+                 E.first_name,
+                 E.last_name,
+                 E.gender,
+                 E.hire_date,
+                 D.dept_name,
+                 T.title
+    </select>
+
+
+
+
+</mapper>

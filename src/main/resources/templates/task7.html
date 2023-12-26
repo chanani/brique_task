@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+        }
+        h1, p {text-align: center}
+        .container {text-align: center}
+    </style>
+
+    <link rel="stylesheet" th:href="@{/css/btn.css}"/>
+</head>
+<body>
+
+<h1>String Calculator</h1>
+<button class="back-btn"><a href="/">뒤로가기</a></button>
+
+<div class="container">
+    <div class="input-box">
+        <form action="#" name="changeForm">
+            <label for="text_input">텍스트를 입력해주세요 : </label>
+            <input type="text" id="text_input" name="input">
+            <input type="button" value="결과보기" onclick="submitBtn()">
+        </form>
+    </div>
+    <p class="result-box" ></p>
+</div>
+
+<script>
+    const change_form = document.changeForm;
+    const result_box = document.querySelector(".result-box");
+    const submitBtn = () => {
+        const input_value = document.querySelector("#text_input").value;
+        fetch("/task7_result" + "?input=" + input_value)
+            .then(response => response.text())
+            .then(data =>  result_box.innerText = '결과 : ' + data)
+            .catch(e => console.log("Error : ", e));
+    }
+</script>
+
+</body>
+</html>

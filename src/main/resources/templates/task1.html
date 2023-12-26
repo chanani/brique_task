@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+        }
+        h1, p {text-align: center}
+        table{
+            margin: 0 auto;
+            border: 1px solid #777;
+        }
+        th, td {
+            border: 1px solid #777;
+        }
+    </style>
+
+    <link rel="stylesheet" th:href="@{/css/btn.css}"/>
+</head>
+<body>
+
+    <h1>csvFile</h1>
+    <p>숫자가 아닌 값 : [[${text}]]</p>
+    <button class="back-btn"><a href="/">뒤로가기</a></button>
+    <table>
+        <thead>
+            <tr>
+                <th>최솟값</th>
+                <th>최대값</th>
+                <th>합계</th>
+                <th>평균값</th>
+                <th>표준편차</th>
+                <th>중간값</th>
+            </tr>
+        </thead>
+        <tbody th:each="item, index : ${list}">
+            <td th:text="${item.get(0)}"></td>
+            <td th:text="${item.get(1)}"></td>
+            <td th:text="${item.get(2)}"></td>
+            <td th:text="${item.get(3)}"></td>
+            <td th:text="${item.get(4)}"></td>
+            <td th:text="${item.get(5)}"></td>
+
+        </tbody>
+    </table>
+
+</body>
+</html>

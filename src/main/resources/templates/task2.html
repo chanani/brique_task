@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/chat.css}"/>
+  <link rel="stylesheet" th:href="@{/css/btn.css}"/>
+
+</head>
+<body>
+  <h1>chat</h1>
+  <button class="back-btn"><a href="/">뒤로가기</a></button>
+
+  <div class="container">
+    <div class="chat-box">
+      <div class="send-box">
+      </div>
+      <div class="received-box">
+
+      </div>
+    </div>
+    <div class="input-box">
+        <input type="text" name="content" placeholder="채팅을 입력해주세요 :)" id="content">
+      <form action="#" method="get" name="chat_form">
+        <input type="button" value="보내기" onclick="onClick()" id="submitBtn">
+      </form>
+    </div>
+  </div>
+</body>
+
+<script>
+  const chat_form = document.chat_form;
+  function onClick() {
+    let text = document.getElementById("content").value;
+    if (text === "") return;
+    let send_box = document.querySelector(".send-box");
+    let received_box = document.querySelector(".received-box");
+    let p = document.createElement("p");
+    let p2 = document.createElement("p");
+    let h4 = document.createElement("h4");
+    let h42 = document.createElement("h4");
+    p.innerText = text;
+    h4.innerText = "d";
+    h4.style.color = "white";
+    h4.style.height = "24px";
+    send_box.appendChild(p);
+    received_box.appendChild(h4);
+
+    fetch("/chat" + "?content=" + text)
+            .then(response => response.text())
+            .then(data => {
+              p2.innerText = data;
+              h42.innerText = "d";
+              h42.style.color = "white";
+              h42.style.height = "24px";
+              setTimeout(() => {
+                received_box.appendChild(p2);
+                send_box.appendChild(h42);
+              },3000)
+
+            })
+            .catch(e => console.log("Error : ", e));
+    document.getElementById("content").value = "";
+  }
+
+</script>
+
+</html>

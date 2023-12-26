@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body {
+        }
+        h1, p {text-align: center}
+        table{
+            margin: 0 auto;
+            border: 1px solid #777;
+        }
+        th, td {
+            border: 1px solid #777;
+        }
+    </style>
+
+    <link rel="stylesheet" th:href="@{/css/btn.css}"/>
+</head>
+<body>
+
+<h1>Http response random</h1>
+<button class="back-btn"><a href="/">뒤로가기</a></button>
+<table>
+    <thead>
+    <tr>
+        <th>count</th>
+        <th>data</th>
+
+    </tr>
+    </thead>
+    <tbody th:each="vo, index : ${list}">
+    <td th:text="${'count : ' + vo.count}"></td>
+    <td th:text="${vo.data}"></td>
+
+
+    </tbody>
+</table>
+
+</body>
+</html>
