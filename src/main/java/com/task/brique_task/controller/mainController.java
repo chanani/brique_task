@@ -35,7 +35,7 @@ public class mainController {
         return "/main";
     }
 
-    @RequestMapping("/task1")
+    /*@RequestMapping("/task1")
     public String csvFile(Model model) {
         CsvReader csv = new CsvReader(); // csvRead 객체 생성
         List<List<String>> list = csv.readCSV(); // 읽은 데이터 list에 초기화
@@ -86,7 +86,7 @@ public class mainController {
         model.addAttribute("list", result);
         model.addAttribute("text", text);
         return "task1";
-    }
+    }*/
 
     @RequestMapping("/task2")
     public String chat() {
@@ -166,7 +166,7 @@ public class mainController {
         return "/task5";
     }
 
-    @RequestMapping("/task7")
+   /* @RequestMapping("/task7")
     public String task7() {
         return "/task7";
     }
@@ -185,7 +185,7 @@ public class mainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("처리 중 오류가 발생하였습니다.");
         }
-    }
+    }*/
 
 
 }
