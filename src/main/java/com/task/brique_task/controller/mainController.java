@@ -88,7 +88,7 @@ public class mainController {
         return "task1";
     }*/
 
-    @RequestMapping("/task2")
+   /* @RequestMapping("/task2")
     public String chat() {
         return "/task2";
     }
@@ -108,7 +108,7 @@ public class mainController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("처리 중 오류가 발생하였습니다.");
         }
-    }
+    }*/
 
     @RequestMapping("/task3")
     public String table(Model model) {
