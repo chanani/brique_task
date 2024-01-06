@@ -29,8 +29,6 @@ public class AgainContoller {
     @Qualifier("employService")
     private EmployService employService;
 
-    @Autowired
-    private SocketService socketService;
 
     final static String SERVER_IP = "127.0.0.1";
     final static int SERVER_PORT = 56768;
@@ -90,10 +88,8 @@ public class AgainContoller {
             final String resultFromServer = new String(data,0,n);
 
             System.out.println(resultFromServer);
-            String msg = socketService.socketServer(resultFromServer);
             socket.close();
-            System.out.println("server response msg : " + msg);
-            return ResponseEntity.ok("send");
+            return ResponseEntity.ok(resultFromServer);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("처리 중 오류가 발생하였습니다.");

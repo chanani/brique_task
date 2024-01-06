@@ -1,23 +1,27 @@
 package com.task.brique_task.config;
 
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-@Service("socketService")
 public class SocketService extends Thread {
 
     final static int SERVER_PORT = 56768;
 
-    public String socketServer(String content) {
+    public static void main(String[] args) {
         ServerSocket serverSocket = null;
-        String messageFromClient = null;
+
         try {
             serverSocket = new ServerSocket(SERVER_PORT);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
             while (true) {
                 System.out.println("socket 연결 대기");
                 Socket socket = serverSocket.accept();
@@ -30,11 +34,12 @@ public class SocketService extends Thread {
 
                 byte[] data = new byte[16];
                 int n = is.read(data);
-                messageFromClient = new String(data,0,n);
+                final String messageFromClient = new String(data,0,n);
 
-                System.out.println("server msg : " + messageFromClient);
-
-                os.write( content.getBytes() );
+                System.out.println(messageFromClient);
+                String send = messageFromClient;
+                if (messageFromClient.equals("ping")) send = "pong";
+                os.write( send.getBytes() );
                 os.flush();
 
                 is.close();
@@ -44,16 +49,7 @@ public class SocketService extends Thread {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                if (serverSocket != null) {
-                    serverSocket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-        return messageFromClient;
     }
 
 }
